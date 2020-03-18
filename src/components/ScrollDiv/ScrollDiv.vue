@@ -7,29 +7,36 @@
 import BScroll from 'better-scroll'
 export default {
   name: 'Scroll',
-  components: {},
-  directives: {},
-  filters: {},
-  mixins: [],
-  props: [],
-  data() {
-    return {
+  props: {
+    scrollX: Boolean,
+    scrollY: {
+      type: Boolean,
+      default: true
     }
   },
   mounted() {
     this.$nextTick(() => {
-      this.scroll = new BScroll(this.$refs.wrapper, {
+      const { scrollX, scrollY, freeScroll } = this
+      let option = Object.assign({
         scrollbar: true,
         mouseWheel: true
+      }, {
+        scrollX,
+        scrollY
       })
+      this.scroll = new BScroll(this.$refs.wrapper, option)
     })
   },
-  methods: {}
+  methods: {
+    refresh() {
+      console.log('refresh')
+      this.scroll.refresh()
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
 .scroll-wrapper {
   position: relative;
-  overflow: hidden;
 }
 </style>

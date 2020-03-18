@@ -85,5 +85,11 @@ export default [
     name: 'downloadFile',
     title: 'downloadFile',
     component: () => import('@/components/DownloadFile')
+  },
+  {
+    path: '/framePageTest',
+    name: 'framePageTest',
+    title: 'framePageTest',
+    component: () => import('@/components/FramePageTest')
   }
 ]

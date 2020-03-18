@@ -1,7 +1,9 @@
 <template>
-  <ScrollDiv class="scroll-box">
-    <el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
-  </ScrollDiv>
+    <ScrollDiv ref="scroll" class="scroll-box-h" :scrollX="true">
+      <span class="content">
+        {{msg}}
+      </span>
+    </ScrollDiv>
 </template>
 <script>
 import BScroll from 'better-scroll'
@@ -17,62 +19,50 @@ export default {
   props: [],
   data() {
     return {
-      data: [{
-        label: '一级 1',
-        children: [{
-          label: '二级 1-1',
-          children: [{
-            label: '三级 1-1-1'
-          }]
-        }]
-      }, {
-        label: '一级 2',
-        children: [{
-          label: '二级 2-1',
-          children: [{
-            label: '三级 2-1-1'
-          }]
-        }, {
-          label: '二级 2-2',
-          children: [{
-            label: '三级 2-2-1'
-          }]
-        }]
-      }, {
-        label: '一级 3',
-        children: [{
-          label: '二级 3-1',
-          children: [{
-            label: '三级 3-1-1'
-          }]
-        }, {
-          label: '二级 3-2',
-          children: [{
-            label: '三级 3-2-1'
-          }]
-        }]
-      }],
-      defaultProps: {
-        children: 'children',
-        label: 'label'
-      }
+      msg: ''
     }
   },
   mounted() {
-
+    setTimeout(() => {
+      this.addContent()
+      this.$nextTick(() => {
+        this.$refs.scroll.refresh()
+      })
+    }, 5000)
   },
-  methods: {}
+  methods: {
+    addContent() {
+      let str = ''
+      for (let i = 0; i < 1000; i++) {
+        str = str + i.toString()
+      }
+      this.msg = this.msg + str
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
+.content {
+  height: 500px;
+  white-space: nowrap;
+  border: 1px solid #000;
+}
 .scroll-box {
+  border: 1px solid red;
   height: 200px;
-  width: 400px;
+  width: 200px;
   background: #ccc;
   .inner {
     height: 800px;
     width: 800px;
     background: #555;
   }
+}
+.scroll-box-h {
+  border: 1px solid red;
+  height: 200px;
+  width: 500px;
+  overflow: hidden;
+  transition: all 1s;
 }
 </style>
