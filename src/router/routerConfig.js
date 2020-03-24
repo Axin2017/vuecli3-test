@@ -91,5 +91,17 @@ export default [
     name: 'framePageTest',
     title: 'framePageTest',
     component: () => import('@/components/FramePageTest')
+  },
+  {
+    path: '/propsTest',
+    name: 'propsTest',
+    title: 'propsTest',
+    component: () => import('@/components/PropsTest')
+  },
+  {
+    path: '/provideTest',
+    name: 'provideTest',
+    title: 'provideTest',
+    component: () => import('@/components/ProvideTest')
   }
 ]
